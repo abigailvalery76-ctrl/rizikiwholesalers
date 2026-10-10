@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shop practical repair guides, laptops, phones, and everyday electronics at RIZIKI.">
+    <title>RIZIKI | Repair, replace, repeat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #202923;
+            --muted: #68716a;
+            --paper: #f5f5ef;
+            --white: #fffefa;
+            --line: #dfe2d8;
+            --green: #28523c;
+            --lime: #d5f36a;
+            --mono: "DM Mono", monospace;
+            --sans: "Manrope", sans-serif;
+        }
+        * { box-sizing: border-box; }
+        body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+        button, input { font: inherit; }
+        button { color: inherit; }
+        .topbar { background: var(--green); color: white; text-align: center; padding: 9px 16px; font: 11px var(--mono); letter-spacing: .04em; }
+        .topbar strong { color: var(--lime); font-weight: 500; }
+        .site-header { background: var(--white); border-bottom: 1px solid var(--line); }
+        .header-inner { max-width: 1320px; min-height: 76px; margin: auto; padding: 0 32px; display: flex; align-items: center; gap: 42px; }
+        .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-size: 21px; font-weight: 800; letter-spacing: .01em; }
+        .brand-mark { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 50%; background: var(--lime); color: var(--green); font-size: 16px; }
+        .nav-links { display: flex; gap: 28px; align-items: center; }
+        .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 700; }
+        .nav-links a:hover { color: var(--green); }
+        .search { margin-left: auto; width: min(300px, 30vw); position: relative; }
+        .search input { width: 100%; height: 42px; border: 1px solid var(--line); border-radius: 3px; padding: 0 14px 0 40px; outline: none; background: var(--paper); font-size: 12px; }
+        .search input:focus { border-color: var(--green); }
+        .search-icon { position: absolute; top: 12px; left: 13px; color: var(--muted); font-size: 17px; line-height: 1; }
+        main { max-width: 1320px; margin: auto; padding: 42px 32px 76px; }
+        .intro { display: flex; justify-content: space-between; align-items: end; gap: 24px; padding: 0 0 30px; }
+        .eyebrow { margin: 0 0 12px; color: var(--green); font: 11px var(--mono); letter-spacing: .08em; }
+        h1 { margin: 0; font-size: clamp(30px, 4vw, 48px); line-height: 1.08; letter-spacing: -.04em; font-weight: 700; }
+        .intro-copy { max-width: 390px; margin: 12px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+        .stock-note { flex: 0 0 auto; padding: 10px 13px; background: #e9eddc; color: var(--green); font: 10px var(--mono); }
+        .stock-note::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%; background: #6b9c4c; }
+        .catalog-bar { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 13px 0; }
+        .filters { display: flex; flex-wrap: wrap; gap: 7px; }
+        .filter { border: 1px solid transparent; background: transparent; padding: 9px 13px; cursor: pointer; color: var(--muted); font-size: 11px; font-weight: 700; }
+        .filter:hover, .filter.active { border-color: var(--green); background: var(--green); color: white; }
+        .result-count { color: var(--muted); font: 10px var(--mono); white-space: nowrap; }
+        .product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 18px; padding-top: 22px; }
+        .product { min-width: 0; animation: rise .35s both; }
+        .product[hidden] { display: none; }
+        .product-image { position: relative; overflow: hidden; background: #e7e8df; aspect-ratio: 1.18 / 1; }
+        .product-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .35s ease; }
+        .product:hover .product-image img { transform: scale(1.035); }
+        .tag { position: absolute; top: 11px; left: 11px; background: var(--white); padding: 6px 8px; color: var(--green); font: 9px var(--mono); text-transform: uppercase; }
+        .product-info { padding: 13px 1px 0; }
+        .product-category { margin: 0 0 5px; color: var(--muted); font: 9px var(--mono); text-transform: uppercase; }
+        .product h2 { margin: 0; font-size: 14px; font-weight: 700; line-height: 1.45; }
+        .product-bottom { margin-top: 11px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+        .price { font-size: 13px; font-weight: 800; }
+        .price small { color: var(--muted); font: 9px var(--mono); }
+        .details { border: 1px solid var(--line); background: transparent; padding: 7px 9px; cursor: pointer; font: 9px var(--mono); }
+        .details:hover { border-color: var(--green); background: var(--green); color: white; }
+        .empty-state { display: none; padding: 46px 0; color: var(--muted); text-align: center; font-size: 13px; }
+        .empty-state.visible { display: block; }
+        .disclaimer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font: 10px var(--mono); }
+        footer { background: var(--green); color: white; }
+        .footer-inner { max-width: 1320px; margin: auto; padding: 22px 32px; display: flex; justify-content: space-between; gap: 16px; font: 10px var(--mono); }
+        .footer-inner a { color: var(--lime); text-decoration: none; }
+        @keyframes rise { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 900px) {
+            .header-inner { gap: 22px; padding: 0 22px; }
+            .nav-links { gap: 16px; }
+            .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            main { padding-right: 22px; padding-left: 22px; }
+        }
+        @media (max-width: 640px) {
+            .topbar { font-size: 9px; }
+            .header-inner { min-height: 64px; padding: 0 16px; gap: 12px; flex-wrap: wrap; }
+            .brand { font-size: 18px; }
+            .nav-links { order: 3; width: 100%; justify-content: space-between; padding: 0 0 12px; }
+            .nav-links a { font-size: 11px; }
+            .search { width: auto; flex: 1; }
+            .search input { height: 36px; }
+            .search-icon { top: 9px; }
+            main { padding: 29px 16px 52px; }
+            .intro { align-items: start; padding-bottom: 22px; }
+            h1 { font-size: 33px; }
+            .intro-copy { font-size: 12px; }
+            .stock-note { display: none; }
+            .catalog-bar { align-items: start; flex-direction: column; gap: 8px; }
+            .filters { gap: 3px; }
+            .filter { padding: 8px 9px; font-size: 10px; }
+            .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 21px 12px; padding-top: 16px; }
+            .product-image { aspect-ratio: .92 / 1; }
+            .product h2 { font-size: 12px; }
+            .product-bottom { align-items: start; flex-direction: column; }
+            .details { padding: 6px 8px; }
+            .footer-inner { padding: 18px 16px; flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">PRACTICAL TECH FOR EVERYDAY LIFE <strong> · GUIDES, GEAR &amp; GOOD PRICES</strong></div>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="#top" aria-label="RIZIKI home"><span class="brand-mark">R</span> RIZIKI</a>
+            <nav class="nav-links" aria-label="Shop categories">
+                <a href="#catalog" data-nav-category="all">Shop all</a>
+                <a href="#catalog" data-nav-category="books">Repair guides</a>
+                <a href="#catalog" data-nav-category="computers">Computers</a>
+                <a href="#catalog" data-nav-category="phones">Phones</a>
+                <a href="contactus.html">Contact</a>
+            </nav>
+            <label class="search"><span class="search-icon" aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Find something useful" aria-label="Search products"></label>
+        </div>
+    </header>
+    <main id="top">
+        <section class="intro" aria-labelledby="page-title">
+            <div>
+                <p class="eyebrow">RIZIKI WHOLESALERS &amp; RETAIL</p>
+                <h1 id="page-title">Good tech.<br>Good to go.</h1>
+                <p class="intro-copy">Hands-on repair guides and reliable electronics for work, learning, and everything in between.</p>
+            </div>
+            <div class="stock-note">A LITTLE MORE LIFE FOR YOUR TECH</div>
+        </section>
+        <section id="catalog" aria-label="Product catalog">
+            <div class="catalog-bar">
+                <div class="filters" role="group" aria-label="Filter products">
+                    <button class="filter active" type="button" data-category="all" aria-pressed="true">All items</button>
+                    <button class="filter" type="button" data-category="books" aria-pressed="false">Repair guides</button>
+                    <button class="filter" type="button" data-category="computers" aria-pressed="false">Laptops</button>
+                    <button class="filter" type="button" data-category="phones" aria-pressed="false">Mobile phones</button>
+                    <button class="filter" type="button" data-category="electronics" aria-pressed="false">Electronics</button>
+                </div>
+                <span class="result-count" id="result-count" aria-live="polite">12 ITEMS</span>
+            </div>
+            <div class="product-grid" id="product-grid">
+                <article class="product" data-category="books" data-name="smartphone repair handbook screen battery charging">
+                    <div class="product-image"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Open electronics repair manual beside a laptop" loading="lazy"><span class="tag">Field guide</span></div>
+                    <div class="product-info"><p class="product-category">Repair guide · Mobile</p><h2>Smartphone Repair Handbook</h2><div class="product-bottom"><span class="price">KSH 2,000 <small>/ book</small></span><button class="details" type="button" data-item="Smartphone Repair Handbook">Enquire</button></div></div>
+                </article>
+                <article class="product" data-category="books" data-name="laptop computer repair service manual troubleshooting">
+                    <div class="product-image"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Laptop repair and troubleshooting guide" loading="lazy"><span class="tag">Step by step</span></div>
+                    <div class="product-info"><p class="product-category">Repair guide · Computers</p><h2>Laptop Repair &amp; Service Manual</h2><div class="product-bottom"><span class="price">KSH 5,000 <small>/ book</small></span><button class="details" type="button" data-item="Laptop Repair &amp; Service Manual">Enquire</button></div></div>
+                </article>
+                <article class="product" data-category="books" data-name="electronics basics multimeter circuits beginner guide">
+                    <div class="product-image"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Electronic circuit board for a beginner repair guide" loading="lazy"><span class="tag">For beginners</span></div>
+                    <div class="product-info"><p class="product-category">Repair guide · Electronics</p><h2>Electronics Repair Basics</h2><div class="product-bottom"><span class="price">KSH 8,000 <small>/ book</small></span><button class="details" type="button" data-item="Electronics Repair Basics">Enquire</button></div></div>
+                </article>
+                <article class="product" data-category="books" data-name="television tv repair troubleshooting service guide">
+                    <div class="product-image"><img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Flat-screen television for a TV repair manual" loading="lazy"><span class="tag">Workshop pick</span></div>
+                    <div class="product-info"><p class="product-category">Repair guide · Home</p><h2>TV Troubleshooting &amp; Repair</h2><div class="product-bottom"><span class="price">KSH 32,000 <small>/ book</small></span><button class="details" type="button" data-item="TV Troubleshooting &amp; Repair">Enquire</button></div></div>
+                </article>
+                <article class="product" data-category="computers" data-name="lenovo thinkpad laptop 14 inch work refurbished">
+                    <div class="product-image"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Slim laptop open on a desk" loading="lazy"><span class="tag">Work ready</span></div>
+                    <div class="product-info"><p class="product-category">Laptop · Lenovo</p><h2>ThinkPad 14&quot; Business Laptop</h2><div class="product-bottom"><span class="price">KSH 250,000 <small>/ unit</small></span><button class="details" type="button" data-item="ThinkPad 14-inch Business Laptop">Enquire</button></div></div>
+                </article>
+                <article class="product" data-category="computers" data-name="hp laptop 15 inch student study computer">
+                    <div class="product-image"><img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Laptop computer on a clean work surface" loading="lazy"><span class="tag">Study pick</span></div>
+                    <div class="product-info"><p class="product-category">Laptop · HP</p><h2>HP 15&quot; Everyday Laptop</h2><div class="product-bottom"><span class="price">KSH 60,000 <small>/ unit</small></span><button class="details" type="button" data-item="HP 15-inch Everyday Laptop">Enquire</button></div></div>
+                </article>
+                <article class="product" data-category="computers" data-name="dell latitude laptop computer office">
+                    <div class="product-image"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Laptop ready for work" loading="lazy"><span class="tag">Business</span></div>
+                    <div class="product-info"><p class="product-category">Laptop · Dell</p><h2>Dell Latitude Laptop</h2><div class="product-bottom"><span class="price">KSH 50,000 <small>/ unit</small></span><button class="details" type="button" data-item="Dell Latitude Laptop">Enquire</button></div></div>
+                </article>
+                <article class="product" data-category="phones" data-name="samsung galaxy smartphone mobile android">
+                    <div class="product-image"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Modern smartphone viewed from the front" loading="lazy"><span class="tag">Everyday</span></div>
+                    <div class="product-info"><p class="product-category">Mobile phone · Samsung</p><h2>Samsung Galaxy A Series</h2><div class="product-bottom"><span class="price">KSH 80,000 <small>/ unit</small></span><button class="details" type="button" data-item="Samsung Galaxy A Series">Enquire</button></div></div>
+                </article>
+                <article class="product" data-category="phones" data-name="iphone apple mobile phone smartphone">
+                    <div class="product-image"><img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Modern smartphone with a bright screen" loading="lazy"><span class="tag">Popular</span></div>
+                    <div class="product-info"><p class="product-category">Mobile phone · Apple</p><h2>iPhone 13</h2><div class="product-bottom"><span class="price">KSH 150,000 <small>/ unit</small></span><button class="details" type="button" data-item="iPhone 13">Enquire</button></div></div>
+                </article>
+                <article class="product" data-category="phones" data-name="tecno spark smartphone mobile android">
+                    <div class="product-image"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Smartphone for everyday communication" loading="lazy"><span class="tag">Great value</span></div>
+                    <div class="product-info"><p class="product-category">Mobile phone · Tecno</p><h2>Tecno Spark Series</h2><div class="product-bottom"><span class="price">KSH 20,000 <small>/ unit</small></span><button class="details" type="button" data-item="Tecno Spark Series">Enquire</button></div></div>
+                </article>
+                <article class="product" data-category="electronics" data-name="wireless bluetooth headphones audio headset">
+                    <div class="product-image"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Over-ear headphones for listening to music" loading="lazy"><span class="tag">Accessories</span></div>
+                    <div class="product-info"><p class="product-category">Audio · Accessories</p><h2>Wireless Bluetooth Headphones</h2><div class="product-bottom"><span class="price">KSH 95,000 <small>/ unit</small></span><button class="details" type="button" data-item="Wireless Bluetooth Headphones">Enquire</button></div></div>
+                </article>
+                <article class="product" data-category="electronics" data-name="smart watch fitness wearable electronics">
+                    <div class="product-image"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Smart watch with digital display" loading="lazy"><span class="tag">Daily carry</span></div>
+                    <div class="product-info"><p class="product-category">Wearables · Accessories</p><h2>Smart Fitness Watch</h2><div class="product-bottom"><span class="price">KSH 45,000 <small>/ unit</small></span><button class="details" type="button" data-item="Smart Fitness Watch">Enquire</button></div></div>
+                </article>
+            </div>
+            <p class="empty-state" id="empty-state">No items match that search. Try another name or category.</p>
+            <p class="disclaimer">Prices shown in KSH are sample listings and may change. Contact RIZIKI to confirm current stock, specifications, and final price.</p>
+        </section>
+    </main>
+    <footer><div class="footer-inner"><span>RIZIKI WHOLESALERS &amp; RETAIL</span><a href="contactus.html">Contact us about an item</a><span>Practical tech, made accessible.</span></div></footer>
+    <script>
+        const products = [...document.querySelectorAll('.product')];
+        const filterButtons = [...document.querySelectorAll('.filter')];
+        const searchInput = document.querySelector('#search');
+        const resultCount = document.querySelector('#result-count');
+        const emptyState = document.querySelector('#empty-state');
+        let activeCategory = 'all';
+
+        function updateCatalog() {
+            const query = searchInput.value.trim().toLowerCase();
+            let visibleCount = 0;
+            products.forEach((product) => {
+                const categoryMatches = activeCategory === 'all' || product.dataset.category === activeCategory;
+                const searchMatches = product.dataset.name.includes(query) || product.querySelector('h2').textContent.toLowerCase().includes(query);
+                product.hidden = !(categoryMatches && searchMatches);
+                if (!product.hidden) visibleCount += 1;
+            });
+            resultCount.textContent = `${visibleCount} ${visibleCount === 1 ? 'ITEM' : 'ITEMS'}`;
+            emptyState.classList.toggle('visible', visibleCount === 0);
+        }
+
+        filterButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                activeCategory = button.dataset.category;
+                filterButtons.forEach((item) => {
+                    const selected = item === button;
+                    item.classList.toggle('active', selected);
+                    item.setAttribute('aria-pressed', String(selected));
+                });
+                updateCatalog();
+            });
+        });
+        document.querySelectorAll('[data-nav-category]').forEach((link) => {
+            link.addEventListener('click', () => {
+                const category = link.dataset.navCategory;
+                const filter = filterButtons.find((button) => button.dataset.category === category);
+                filter?.click();
+            });
+        });
+        searchInput.addEventListener('input', updateCatalog);
+        document.querySelectorAll('.details').forEach((button) => {
+            button.addEventListener('click', () => {
+                const item = button.dataset.item;
+                const subject = encodeURIComponent(`Product enquiry: ${item}`);
+                window.location.href = `mailto:hello@riziki.example?subject=${subject}`;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact RIZIKI Wholesalers & Retail about product availability, prices, and repair guides.">
+    <title>Contact RIZIKI | Wholesalers &amp; Retail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #202923;
+            --muted: #68716a;
+            --paper: #f5f5ef;
+            --white: #fffefa;
+            --line: #dfe2d8;
+            --green: #28523c;
+            --lime: #d5f36a;
+            --mono: "DM Mono", monospace;
+            --sans: "Manrope", sans-serif;
+        }
+        * { box-sizing: border-box; }
+        body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+        .topbar { background: var(--green); color: white; text-align: center; padding: 9px 16px; font: 11px var(--mono); letter-spacing: .04em; }
+        .topbar strong { color: var(--lime); font-weight: 500; }
+        header { background: var(--white); border-bottom: 1px solid var(--line); }
+        .header-inner { max-width: 1180px; min-height: 76px; margin: auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+        .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-size: 21px; font-weight: 800; }
+        .brand-mark { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 50%; background: var(--lime); color: var(--green); font-size: 16px; }
+        nav { display: flex; align-items: center; gap: 26px; }
+        nav a { color: var(--muted); text-decoration: none; font-size: 12px; font-weight: 700; }
+        nav a:hover, nav a[aria-current="page"] { color: var(--green); }
+        main { max-width: 1180px; margin: auto; padding: 56px 32px 78px; }
+        .eyebrow { margin: 0 0 12px; color: var(--green); font: 11px var(--mono); letter-spacing: .08em; }
+        h1 { margin: 0; font-size: clamp(34px, 5vw, 56px); line-height: 1.08; letter-spacing: -.04em; }
+        .lead { max-width: 590px; margin: 16px 0 40px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+        .contact-layout { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 56px; align-items: start; }
+        .contact-details { border-top: 1px solid var(--line); }
+        .detail-row { padding: 20px 0; border-bottom: 1px solid var(--line); }
+        .detail-label { margin: 0 0 7px; color: var(--muted); font: 10px var(--mono); text-transform: uppercase; }
+        .detail-value { margin: 0; font-size: 14px; font-weight: 700; line-height: 1.6; }
+        .detail-value.placeholder { color: var(--muted); font-weight: 500; }
+        .details-note { margin: 18px 0 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
+        .form-panel { background: var(--white); border: 1px solid var(--line); padding: 28px; }
+        .form-panel h2 { margin: 0; font-size: 20px; letter-spacing: -.02em; }
+        .form-intro { margin: 8px 0 22px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .field { display: flex; flex-direction: column; gap: 7px; }
+        .field.full { grid-column: 1 / -1; }
+        label { font-size: 11px; font-weight: 700; }
+        input, select, textarea { width: 100%; border: 1px solid var(--line); border-radius: 2px; padding: 11px 12px; background: var(--paper); color: var(--ink); font: 12px var(--sans); outline: none; }
+        input:focus, select:focus, textarea:focus { border-color: var(--green); }
+        textarea { min-height: 124px; resize: vertical; }
+        .submit-row { margin-top: 18px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+        .submit-button { border: 0; background: var(--green); color: white; padding: 12px 17px; font: 11px var(--mono); cursor: pointer; }
+        .submit-button:hover { background: #1b3f2c; }
+        .form-status { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+        footer { background: var(--green); color: white; }
+        .footer-inner { max-width: 1180px; margin: auto; padding: 22px 32px; display: flex; justify-content: space-between; gap: 16px; font: 10px var(--mono); }
+        .footer-inner a { color: var(--lime); text-decoration: none; }
+        @media (max-width: 720px) {
+            .header-inner { min-height: 68px; padding: 0 18px; }
+            nav { gap: 16px; }
+            main { padding: 39px 18px 52px; }
+            .lead { margin-bottom: 28px; }
+            .contact-layout { grid-template-columns: 1fr; gap: 30px; }
+            .form-panel { padding: 22px 18px; }
+            .footer-inner { padding: 18px; flex-direction: column; }
+        }
+        @media (max-width: 440px) {
+            .header-inner { align-items: flex-start; flex-direction: column; gap: 10px; padding-top: 13px; padding-bottom: 13px; }
+            nav { width: 100%; justify-content: space-between; }
+            nav a { font-size: 11px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .field.full { grid-column: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">PRACTICAL TECH FOR EVERYDAY LIFE <strong> · GUIDES, GEAR &amp; GOOD PRICES</strong></div>
+    <header>
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="RIZIKI home"><span class="brand-mark">R</span> RIZIKI</a>
+            <nav aria-label="Main navigation">
+                <a href="index.html">Shop</a>
+                <a href="index.html#catalog">Products</a>
+                <a href="contactus.html" aria-current="page">Contact</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <p class="eyebrow">RIZIKI WHOLESALERS &amp; RETAIL</p>
+        <h1>Let’s talk tech.</h1>
+        <p class="lead">Questions about a repair guide, laptop, phone, or another electronic device? Send us a message about what you need, and we’ll help you find the right information.</p>
+
+        <div class="contact-layout">
+            <section aria-label="RIZIKI contact information">
+                <div class="contact-details">
+                    <div class="detail-row">
+                        <p class="detail-label">Call or WhatsApp</p>
+                        <p class="detail-value placeholder">Add RIZIKI’s business phone number</p>
+                    </div>
+                    <div class="detail-row">
+                        <p class="detail-label">Email</p>
+                        <p class="detail-value placeholder">Add RIZIKI’s business email address</p>
+                    </div>
+                    <div class="detail-row">
+                        <p class="detail-label">Visit us</p>
+                        <p class="detail-value placeholder">Add shop address and directions</p>
+                    </div>
+                    <div class="detail-row">
+                        <p class="detail-label">Business hours</p>
+                        <p class="detail-value placeholder">Add opening days and hours</p>
+                    </div>
+                </div>
+                <p class="details-note">Before visiting, check with us to confirm product availability and current prices.</p>
+            </section>
+
+            <section class="form-panel" aria-labelledby="message-title">
+                <h2 id="message-title">Send an enquiry</h2>
+                <p class="form-intro">Tell us what you’re looking for, including the product name or model if you know it.</p>
+                <form id="contact-form">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="name">Your name</label>
+                            <input id="name" name="name" autocomplete="name" required>
+                        </div>
+                        <div class="field">
+                            <label for="reply">Phone or email</label>
+                            <input id="reply" name="reply" autocomplete="email" required>
+                        </div>
+                        <div class="field full">
+                            <label for="topic">What can we help with?</label>
+                            <select id="topic" name="topic" required>
+                                <option value="" selected disabled>Select a topic</option>
+                                <option>Repair guide or manual</option>
+                                <option>Laptop or computer</option>
+                                <option>Mobile phone</option>
+                                <option>Other electronic device</option>
+                                <option>Order or general question</option>
+                            </select>
+                        </div>
+                        <div class="field full">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Product, model, or question..." required></textarea>
+                        </div>
+                    </div>
+                    <div class="submit-row">
+                        <button class="submit-button" type="submit">Prepare message</button>
+                        <p class="form-status" id="form-status" role="status">The message form needs RIZIKI’s email or a form service connected before it can deliver enquiries.</p>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-inner">
+            <span>RIZIKI WHOLESALERS &amp; RETAIL</span>
+            <a href="index.html">Back to the shop</a>
+            <span>Practical tech, made accessible.</span>
+        </div>
+    </footer>
+    <script>
+        document.querySelector('#contact-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            document.querySelector('#form-status').textContent = 'Thanks. This form is not connected yet, so your message has not been sent. Please contact RIZIKI directly once the phone or email details are added.';
+        });
+    </script>
+</body>
+</html>
